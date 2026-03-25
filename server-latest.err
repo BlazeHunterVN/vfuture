@@ -1,0 +1,13 @@
+ ⚠ For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended. Run 'npm i sharp', and Next.js will use it automatically for Image Optimization.
+Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
+ ⨯ Error: new row violates row-level security policy for table "settings"
+    at H (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\.next\server\chunks\4034.js:1:15239)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async g (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\.next\server\app\api\admin\settings\route.js:1:1394)
+    at async D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:36258
+    at async eR.execute (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:26874)
+    at async eR.handle (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37512)
+    at async doRender (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\server\base-server.js:1377:42)
+    at async cacheEntry.responseCache.get.routeKind (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\server\base-server.js:1599:28)
+    at async NextNodeServer.renderToResponseWithComponentsImpl (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\server\base-server.js:1507:28)
+    at async NextNodeServer.renderPageComponent (D:\VS Code Project\WEBSITE_FF_NEW\WEBSITE_FF_NEW_V5_TEST\node_modules\next\dist\server\base-server.js:1931:24)

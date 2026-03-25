@@ -1,0 +1,69 @@
+# Environment Variables (CRITICAL - Contains API Keys)
+.env
+.env.local
+.env.production
+.env.development
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+.vercel/
+.output/
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-workspace
+.sublime-project
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.temp/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Optional: Minified files (if you regenerate them)
+# Uncomment if you want to exclude minified files from repo
+# assets/css/*.min.css
+# assets/js/*.min.js
+
+# Optional: Admin directory (if you want to keep it private)
+# Uncomment if admin panel should not be in public repo
+# admin/
