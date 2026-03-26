@@ -19,11 +19,13 @@ function urlBase64ToUint8Array(base64String: string) {
 }
 
 export function PushNotificationButton({ className }: { className?: string }) {
+  const [mounted, setMounted] = useState(false);
   const [supported, setSupported] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if ("serviceWorker" in navigator && "PushManager" in window && VAPID_PUBLIC_KEY) {
       setSupported(true);
       navigator.serviceWorker.register("/sw.js").then(async (reg) => {
@@ -32,6 +34,8 @@ export function PushNotificationButton({ className }: { className?: string }) {
       }).catch(() => null);
     }
   }, []);
+
+  if (!mounted) return null;
 
   const toggle = async () => {
     if (!supported) return;
