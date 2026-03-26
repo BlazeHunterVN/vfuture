@@ -23,7 +23,7 @@ export function GalleryPreview({ gallery }: GalleryPreviewProps) {
         title="Khoảnh khắc cộng đồng"
         description="Masonry layout tối ưu mobile, hover zoom mượt và dễ mở rộng."
       />
-      <div className="flex gap-4 overflow-x-auto pb-2 md:columns-2 md:block md:space-y-4 md:overflow-visible xl:columns-3 [&>*]:shrink-0 [&>*]:w-[75vw] md:[&>*]:w-auto md:[&>*]:break-inside-avoid">
+      <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory md:columns-2 md:block md:space-y-4 md:overflow-visible xl:columns-3 [&>*]:shrink-0 [&>*]:w-[82vw] [&>*]:snap-center md:[&>*]:w-auto md:[&>*]:break-inside-avoid">
         {gallery.slice(0, 3).map((item, index) => {
           const isFailed = failedImages.has(item.image_url);
 
