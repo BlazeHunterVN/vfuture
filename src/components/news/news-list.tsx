@@ -30,6 +30,7 @@ export function NewsList({ news: initialNews }: NewsListProps) {
   const [category, setCategory] = useState("all");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [filterOpen, setFilterOpen] = useState(false);
   const { data: news = initialNews } = useNewsQuery("published");
 
   const categories = useMemo(() => ["all", ...Array.from(new Set(news.map((item) => item.category)))], [news]);
@@ -58,7 +59,17 @@ export function NewsList({ news: initialNews }: NewsListProps) {
 
   return (
     <div className="space-y-4">
-      <div className="glass-card grid gap-3 rounded-2xl p-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="glass-card rounded-2xl p-4 md:grid-cols-2 xl:grid-cols-4">
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          onClick={() => setFilterOpen(!filterOpen)}
+          className="flex w-full items-center justify-between md:hidden"
+        >
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">BỘ LỌC</span>
+          <span className="text-xs text-muted-foreground">{filterOpen ? "▲ Thu gọn" : "▼ Mở rộng"}</span>
+        </button>
+        <div className={cn("grid gap-3 md:grid-cols-2 xl:grid-cols-4", filterOpen ? "mt-3" : "hidden md:grid")}>
         <div className="space-y-1">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">CHUYÊN MỤC</p>
           <Select value={category} onValueChange={(value) => setCategory(value ?? "all")}>
