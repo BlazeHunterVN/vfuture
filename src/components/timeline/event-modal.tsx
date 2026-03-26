@@ -66,7 +66,7 @@ export function EventModal({ event, open, onOpenChange }: EventModalProps) {
               </div>
 
               {event.link?.trim() ? (
-                <Button asChild className="mt-2 h-9 w-full max-w-xs rounded-[10px]">
+                <Button asChild className="mt-2 h-9 w-full rounded-[10px]">
                   <a href={event.link} target="_blank" rel="noreferrer">
                     TRUY CẬP LIÊN KẾT
                     <ExternalLink className="ml-2 size-4" />
