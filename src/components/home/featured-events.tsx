@@ -46,7 +46,6 @@ export function FeaturedEvents({ events }: FeaturedEventsProps) {
                 "group relative flex cursor-pointer flex-col overflow-hidden rounded-[14px] border bg-white px-4 pt-4 pb-2 transition-all duration-300 dark:bg-card",
                 featuredStatusCardClassMap[event.status],
                 selectedEvent && "opacity-40 scale-[0.98]",
-                selectedEvent?.id === event.id && "!opacity-100 !scale-100 z-50 relative",
               )}
               onClick={() => setSelectedEvent(event)}
             >
