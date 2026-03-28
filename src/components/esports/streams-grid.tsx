@@ -102,7 +102,7 @@ export function StreamsGrid({ initialStreams }: StreamsGridProps) {
                 />
               </div>
               <span className={cn(
-                "absolute right-0 top-0 z-10 inline-flex items-center gap-1.5 rounded-[6px] px-[7px] py-2 text-[0.8rem] font-bold uppercase shadow-sm",
+                "absolute right-0 top-0 z-10 inline-flex items-center gap-1.5 rounded-[6px] px-[7px] py-3 text-[0.8rem] font-bold uppercase shadow-sm",
                 statusBadgeClass[stream.status],
               )}>
                 {stream.status === "live" && <Radio className="size-3 animate-pulse" />}

@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "ESPORTS",
+  title: "Esports",
   description: "Xem trực tiếp và theo dõi các buổi phát sóng ESPORTS của cộng đồng VFuture.",
 };
 
