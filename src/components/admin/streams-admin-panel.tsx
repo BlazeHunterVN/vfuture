@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Plus, Trash2, Edit2, Radio } from "lucide-react";
@@ -39,9 +39,22 @@ export function StreamsAdminPanel() {
   const { data: streams = [], isLoading } = useQuery({
     queryKey: ["streams-admin"],
     queryFn: fetchAdminStreams,
+    refetchInterval: 60_000, // auto-refresh mỗi 60s
     refetchOnWindowFocus: true,
   });
   const refresh = () => queryClient.invalidateQueries({ queryKey: ["streams-admin"] });
+
+  // Auto-sync YouTube status khi mở trang và mỗi 60s
+  useEffect(() => {
+    const sync = async () => {
+      await fetch("/api/streams/sync", { method: "POST" }).catch(() => null);
+      refresh();
+    };
+    sync();
+    const interval = setInterval(sync, 60_000);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
