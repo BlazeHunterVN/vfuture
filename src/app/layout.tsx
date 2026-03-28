@@ -78,6 +78,11 @@ export default function RootLayout({
       <link rel="icon" href={faviconUrl} sizes="any" />
       <link rel="apple-touch-icon" href={faviconUrl} />
       <link rel="shortcut icon" href={faviconUrl} />
+      {/* Preconnect YouTube để giảm độ trễ khi load video */}
+      <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+      <link rel="preconnect" href="https://www.youtube.com" />
+      <link rel="preconnect" href="https://i.ytimg.com" />
+      <link rel="dns-prefetch" href="https://googlevideo.com" />
       <body className={cn("font-body min-h-screen bg-background text-foreground antialiased")}>
         <AppProviders>{children}</AppProviders>
       </body>

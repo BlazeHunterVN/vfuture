@@ -108,9 +108,12 @@ export function StreamModal({ stream, open, onOpenChange }: StreamModalProps) {
                   <iframe
                     src={embedUrl}
                     className="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; web-share"
                     allowFullScreen
+                    loading="eager"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     title={stream.title}
+                    style={{ border: 0 }}
                   />
                 </div>
               ) : (

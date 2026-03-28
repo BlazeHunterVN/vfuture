@@ -19,5 +19,7 @@ export function buildWatchUrl(youtubeUrl: string): string {
 }
 
 export function buildEmbedUrl(youtubeUrl: string): string {
-  return `https://www.youtube.com/embed/${extractYouTubeId(youtubeUrl)}?autoplay=1&rel=0`;
+  const id = extractYouTubeId(youtubeUrl);
+  // Tối ưu: autoplay, chất lượng cao nhất, không related, không modestbranding
+  return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&vq=hd1080`;
 }
