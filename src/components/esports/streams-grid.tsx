@@ -43,22 +43,67 @@ export function StreamsGrid({ initialStreams }: StreamsGridProps) {
   const { data: streams = initialStreams } = useQuery({
     queryKey: ["streams"],
     queryFn: fetchStreams,
-    refetchInterval: 30_000,
+    refetchInterval: 2 * 60 * 1000, // 2 phút — khớp với server cooldown
     refetchOnWindowFocus: true,
   });
 
   const [selectedStream, setSelectedStream] = useState<StreamItem | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Auto-sync YouTube status mỗi 30s và ngay khi load
+  // Smart polling: chỉ sync khi gần đến giờ stream
   useEffect(() => {
-    const sync = async () => {
-      await fetch("/api/streams/sync", { method: "POST" }).catch(() => null);
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    const getNextInterval = (): number | null => {
+      const now = Date.now();
+      let minMs: number | null = null;
+
+      for (const s of streams) {
+        if (s.status === "ended") continue;
+
+        if (s.status === "live") {
+          // Đang live → poll mỗi 60s để detect khi kết thúc
+          return 60_000;
+        }
+
+        if (s.status === "upcoming") {
+          const scheduledAt = new Date(s.scheduled_at).getTime();
+          const diff = scheduledAt - now;
+
+          if (diff <= 0) {
+            // Đã qua giờ nhưng chưa live → poll mỗi 20s
+            return 20_000;
+          }
+
+          if (diff <= 5 * 60 * 1000) {
+            // Còn < 5 phút → poll mỗi 20s
+            const ms = 20_000;
+            minMs = minMs === null ? ms : Math.min(minMs, ms);
+          }
+          // Còn > 5 phút → không poll
+        }
+      }
+
+      return minMs;
     };
-    sync();
-    const interval = setInterval(sync, 30_000);
-    return () => clearInterval(interval);
-  }, []);
+
+    const scheduleNext = () => {
+      if (interval) clearInterval(interval);
+      const ms = getNextInterval();
+      if (!ms) return; // Không cần poll
+
+      interval = setInterval(async () => {
+        await fetch("/api/streams/sync", { method: "POST" }).catch(() => null);
+        scheduleNext(); // Recalculate sau mỗi lần sync
+      }, ms);
+    };
+
+    // Trigger ngay khi load
+    fetch("/api/streams/sync", { method: "POST" }).catch(() => null);
+    scheduleNext();
+
+    return () => { if (interval) clearInterval(interval); };
+  }, [streams]);
 
   // Hiện tất cả: live, upcoming, và ended (để xem lại)
   const visibleStreams = streams;
