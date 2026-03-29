@@ -43,7 +43,7 @@ const nextConfig = {
       "font-src 'self' data: https://fonts.gstatic.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-      "connect-src 'self' https://*.supabase.co https://www.googleapis.com https://i.ytimg.com",
+      "connect-src 'self' https://*.supabase.co https://www.googleapis.com https://i.ytimg.com https://www.youtube-nocookie.com",
       "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
       "form-action 'self' https://mail.google.com https://accounts.google.com",
       "upgrade-insecure-requests",

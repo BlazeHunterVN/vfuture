@@ -97,7 +97,7 @@ export function StreamModal({ stream, open, onOpenChange }: StreamModalProps) {
           <div className="px-5">
             <div className="overflow-hidden rounded-[10px] bg-black">
               {isLive || isEnded ? (
-                <StreamPlayer embedUrl={embedUrl} title={stream.title} />
+                <StreamPlayer embedUrl={embedUrl} title={stream.title} isLive={isLive} />
               ) : (
                 <div className="relative aspect-video w-full">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

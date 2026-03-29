@@ -42,8 +42,8 @@ async function detectYouTubeStatus(videoId: string): Promise<StreamStatus | null
 }
 
 export async function POST(request: NextRequest) {
-  // Rate limit chặt — chỉ cho phép 5 request/phút
-  const limited = enforceRateLimit(request, { name: "streams-sync", limit: 5, windowMs: 60_000 });
+  // Rate limit: 10 request/phút — đủ cho polling 20s
+  const limited = enforceRateLimit(request, { name: "streams-sync", limit: 10, windowMs: 60_000 });
   if (limited) return limited;
 
   // Server-side cooldown — bỏ qua nếu vừa sync xong
@@ -119,5 +119,8 @@ export async function POST(request: NextRequest) {
     } catch { /* ignore */ }
   }
 
-  return NextResponse.json({ synced: updates.length, updated: updates });
+  return NextResponse.json(
+    { synced: updates.length, updated: updates },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }
