@@ -50,11 +50,13 @@ export function StreamsGrid({ initialStreams }: StreamsGridProps) {
   const [selectedStream, setSelectedStream] = useState<StreamItem | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Auto-sync YouTube status mỗi 60s
+  // Auto-sync YouTube status mỗi 30s và ngay khi load
   useEffect(() => {
-    const sync = () => fetch("/api/streams/sync", { method: "POST" }).catch(() => null);
+    const sync = async () => {
+      await fetch("/api/streams/sync", { method: "POST" }).catch(() => null);
+    };
     sync();
-    const interval = setInterval(sync, 60_000);
+    const interval = setInterval(sync, 30_000);
     return () => clearInterval(interval);
   }, []);
 
